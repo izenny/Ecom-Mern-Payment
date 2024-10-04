@@ -1,15 +1,37 @@
 import CommonForm from '@/Components/Common/Form'
 import { loginFormControls } from '@/Config'
+import { useToast } from '@/hooks/use-toast'
+import { loginUser } from '@/Redux/AuthSlice'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 const initialState ={
   email : '',
   password:''
 }
 const Login = () => {
   const [formData,setFormData] =useState(initialState)
-  const onSubmit = ()=>{
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { toast } = useToast();
 
+  function onSubmit(event) {
+    event.preventDefault();
+
+    dispatch(loginUser(formData)).then((data) => {
+      if (data?.payload?.success) {
+        console.log(data);
+        
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: "destructive",
+        });
+      }
+    });
   }
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
