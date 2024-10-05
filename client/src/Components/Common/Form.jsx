@@ -4,6 +4,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
 import {
+  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
@@ -30,21 +31,29 @@ const CommonForm = ({
             id={getControlItem.name}
             type={getControlItem.type}
             value={value}
-            onChange ={event=>setFormData({
-                ...formData,[getControlItem.name]:event.target.value,
-            })}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           />
         );
 
         break;
       case "select":
         element = (
-          <Select onValueChange={(value)=>setFormData({
-            ...formData,
-            [getControlItem.name] :value
-          })} value={value}>
+          <Select
+            onValueChange={(value) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: value,
+              })
+            }
+            value={value}
+          >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder={getControlItem.placeholder} />
+              <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
               {getControlItem.options && getControlItem.options.length > 0
@@ -67,9 +76,12 @@ const CommonForm = ({
             id={getControlItem.name}
             type={getControlItem.type}
             value={value}
-            onChange ={event=>setFormData({
-                ...FormData,[getControlItem.name]:event.target.value,
-            })}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           ></Textarea>
         );
 
@@ -82,6 +94,13 @@ const CommonForm = ({
             placeholder={getControlItem.placeholder}
             id={getControlItem.name}
             type={getControlItem.type}
+            value={value}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           />
         );
         break;

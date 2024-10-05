@@ -18,6 +18,7 @@ import CheckAuth from "./Components/Common/CheckAuth";
 import UnAuthPage from "./Pages/UnAuthPage";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./Redux/AuthSlice";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const App = () => {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -30,7 +31,14 @@ console.log(isLoading,user);
     dispatch(checkAuth());
   }, [dispatch]);
 if (isLoading) {
-  return <div>loading...</div>
+  return        <div className=" w-screen h-screen flex items-center justify-center space-x-4">
+  <Skeleton className="h-12 w-12 rounded-full bg-slate-200" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-[250px] bg-slate-200" />
+    <Skeleton className="h-4 w-[200px] bg-slate-200" />
+  </div>
+</div>
+
 }
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -80,3 +88,25 @@ if (isLoading) {
 };
 
 export default App;
+
+
+
+
+
+// import React from "react";
+
+// const App = () => {
+//   return (
+    
+      // <div className=" w-screen h-screen flex items-center justify-center space-x-4">
+      //   <Skeleton className="h-12 w-12 rounded-full bg-slate-200" />
+      //   <div className="space-y-2">
+      //     <Skeleton className="h-4 w-[250px] bg-slate-200" />
+      //     <Skeleton className="h-4 w-[200px] bg-slate-200" />
+      //   </div>
+      // </div>
+   
+//   );
+// };
+
+// export default App;

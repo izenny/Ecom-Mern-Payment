@@ -5,6 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
 const AuthRoutes = require('./Routes/AuthRoute')
+const AdminProductRouter = require('./Routes/AdminRoutes/AdminProductRoute')
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -27,9 +28,12 @@ app.use(
 //   })
 // );
 dotenv.config();
+
 app.use(cookieparser()); 
 app.use(express.json());
 app.use('/api/auth',AuthRoutes)
+app.use('/api/admin/products',AdminProductRouter)
+
 mongoose.connect(process.env.MONGO_URL).then(() => {
   console.log("server connected to database");
 });
